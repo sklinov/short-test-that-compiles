@@ -25,15 +25,17 @@ const Catalog = React.memo(() => {
 
   const handleError = useCallback((error: Error) => {
     console.error(error.message);
-  },[]);
+  }, []);
 
   useEffect(() => {
     fetchData()
       .then((res) => {
-        res.forEach((result) => setRecord(prev => ({ ...prev, [result.id]: result })));
+        res.forEach((result) =>
+          setRecord((prev) => ({ ...prev, [result.id]: result }))
+        );
       })
       .catch((error) => handleError(error));
-  }, [count, handleError, record]); // handleError
+  }, [count, record]); // handleError
 
   return (
     <div className="App">
